@@ -19,7 +19,6 @@ $(function() {
       dataType: 'json',
       data: {teamName: team},
       success: function(data) {
-        // console.log(data);
         getTeamData(data.teamName);
       }
     });
