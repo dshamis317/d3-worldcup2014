@@ -9,7 +9,9 @@
   <script src="visualization.js"></script>
 </head>
 <body>
+
   <h1>Who's Your team?</h1>
+
   <form class="team-submit">
     <input type="text" class="team-name" placeholder="USA">
     <button type="submit" class="team-submit">Display</button>
@@ -92,6 +94,38 @@
       </tr>
     </table>
   </div>
+
+  <svg></svg>
+
+  <script>
+
+    $(function() {
+      $('.team-submit').submit(function(e) {
+        e.preventDefault();
+        teamName()
+      })
+    })
+
+    function teamName() {
+      var inputField = $('.team-name')
+      var team = inputField.val().toUpperCase();
+      inputField.val('')
+      getTeamInfo(team);
+    }
+
+    function getTeamInfo(team) {
+      $.ajax({
+        url: '/team',
+        method: 'post',
+        dataType: 'json',
+        data: {teamName: team},
+        success: function(data) {
+          console.log(data)
+        }
+      })
+    }
+
+  </script>
 
 </body>
 </html>
