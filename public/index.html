@@ -99,31 +99,45 @@
 
   <script>
 
-    $(function() {
-      $('.team-submit').submit(function(e) {
-        e.preventDefault();
-        teamName()
-      })
+  $(function() {
+    $('.team-submit').submit(function(e) {
+      e.preventDefault();
+      teamData();
     })
+  });
 
-    function teamName() {
-      var inputField = $('.team-name')
-      var team = inputField.val().toUpperCase();
-      inputField.val('')
-      getTeamInfo(team);
-    }
+  function teamData() {
+    var inputField = $('.team-name');
+    var team = inputField.val().toUpperCase();
+    inputField.val('');
+    postTeam(team);
+  };
 
-    function getTeamInfo(team) {
-      $.ajax({
-        url: '/team',
-        method: 'post',
-        dataType: 'json',
-        data: {teamName: team},
-        success: function(data) {
-          console.log(data)
-        }
-      })
-    }
+  function postTeam(team) {
+    $.ajax({
+      url: '/team',
+      method: 'post',
+      dataType: 'json',
+      data: {teamName: team},
+      success: function(data) {
+        // console.log(data);
+        getTeamData(data.teamName);
+      }
+    });
+  }
+
+  function getTeamData(team) {
+    var teamName = team;
+    $.ajax({
+      url: '/team/'+ teamName,
+      method: 'get',
+      // dataType: 'json',
+      success: function(data) {
+        console.log(data)
+      }
+    });
+  }
+
 
   </script>
 
