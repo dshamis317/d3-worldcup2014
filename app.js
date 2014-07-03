@@ -8,8 +8,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.listen(80, function() {
-  console.log('Listening on port 80');
+app.listen(process.env.PORT, function() {
+  console.log('Listening on port %d');
 })
 
 app.post('/team', function(req, res) {
