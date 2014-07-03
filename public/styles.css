@@ -6,3 +6,7 @@ img {
 .teams {
   display: none;
 }
+
+svg {
+  margin: 0 auto;
+}

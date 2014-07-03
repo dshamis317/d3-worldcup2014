@@ -64,30 +64,90 @@ function parseData(data) {
 
 // Build SVG
 function buildSvg(data) {
+  var data = data;
+
   var margin = {
     top: 100,
     bottom: 100,
     left: 100,
     right: 100
   }
-  var width = $(window).width() - margin.left - margin.right;
-  var height = 600 - margin.top -margin.bottom
+  var width = 1265 - margin.left - margin.right;
+  var height = 500 - margin.top - margin.bottom;
 
-  window.lineScale = d3.scale.linear()
-                        .domain([0, 120])
-                        .range([0, width])
+  var maxGoalsHome = d3.max(data, function(team) {
+    return team.homeGoals;
+  });
 
-  window.svg = d3.select('body')
+  var maxGoalsAway = d3.max(data, function(team) {
+    return team.awayGoals;
+  });
+
+  var homeColor = d3.scale.linear()
+                      .range(['#ff0000', '#0000ff'])
+                      .domain([0, maxGoalsHome]);
+
+  var awayColor = d3.scale.linear()
+                      .range(['#ffff00', '#00ffff'])
+                      .domain([0, maxGoalsAway]);
+
+  var xScale = d3.scale.linear()
+                  .domain([0, maxGoalsHome + 1])
+                  .range([0, width]);
+
+  var xAxis = d3.svg.axis()
+                    .scale(xScale)
+                    .orient('bottom');
+
+  var canvas = d3.select('body')
                  .append('svg')
                    .attr('width', width + margin.right + margin.left)
                    .attr('height', height + margin.top + margin.bottom)
                  .append('g')
                    .attr('width', width)
                    .attr('height', height)
-                   // .attr('class', graph)
+                   .attr('class', 'set')
                    .attr('transform', 'translate('+ margin.left + ','+ margin.top + ')');
 
-  var line = d3.svg.line()
-                   .interpolate('basis')
+  var canvas2 = d3.select('body')
+                 .append('svg')
+                   .attr('width', width + margin.right + margin.left)
+                   .attr('height', height + margin.top + margin.bottom)
+                 .append('g')
+                   .attr('width', width)
+                   .attr('height', height)
+                   .attr('class', 'set')
+                   .attr('transform', 'translate('+ margin.left + ','+ margin.top + ')');
 
+  var home = canvas.selectAll('rect')
+                    .data(data)
+                    .enter()
+                    .append('rect')
+                      .attr('width', function(d) {return xScale(d.homeGoals)})
+                      .attr('height', 20)
+                      .attr('fill', function(d) {return homeColor(d.homeGoals)})
+                      .attr('x', function(d, i) {return i})
+                      .attr('y', function(d, i) {return i * 60})
+                      // .append('text')
+                      //   .text('Home Goals')
+
+  var away = canvas2.selectAll('rect')
+                    .data(data)
+                    .enter()
+                    .append('rect')
+                      .attr('width', function(d) {return xScale(d.awayGoals)})
+                      .attr('height', 20)
+                      .attr('fill', function(d) {return awayColor(d.awayGoals)})
+                      .attr('x', function(d, i) {return i})
+                      .attr('y', function(d, i) {return i * 30})
+                      // .append('text')
+                      //   .text(function(d){return d.away})
+
+  canvas.append('g')
+        .attr('transform', 'translate(0, 300)')
+        .call(xAxis)
+
+  canvas2.append('g')
+        .attr('transform', 'translate(0, 300)')
+        .call(xAxis)
 }
