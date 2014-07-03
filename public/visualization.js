@@ -5,6 +5,7 @@ $(function() {
 
   $('.team-submit').submit(function(e) {
     e.preventDefault();
+    $('.visualization').html('');
     teamData();
   })
 });
@@ -99,7 +100,7 @@ function buildSvg(data) {
                     .scale(xScale)
                     .orient('bottom');
 
-  var canvas = d3.select('body')
+  var canvas = d3.select('.visualization')
                  .append('svg')
                    .attr('width', width + margin.right + margin.left)
                    .attr('height', height + margin.top + margin.bottom)
@@ -109,7 +110,7 @@ function buildSvg(data) {
                    .attr('class', 'set')
                    .attr('transform', 'translate('+ margin.left + ','+ margin.top + ')');
 
-  var canvas2 = d3.select('body')
+  var canvas2 = d3.select('.visualization')
                  .append('svg')
                    .attr('width', width + margin.right + margin.left)
                    .attr('height', height + margin.top + margin.bottom)
