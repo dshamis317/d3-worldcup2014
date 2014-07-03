@@ -1,0 +1,15 @@
+{
+  "name": "d3-worldcup",
+  "description": "A D3 visualization of goals scored by team based on user input",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "4.4.5",
+    "path": "0.4.9",
+    "request": "2.36.0",
+    "body-parser": "1.4.3"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}
