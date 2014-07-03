@@ -8,6 +8,7 @@ $(function() {
     $('.visualization').html('');
     $('.home-title').show();
     $('.away-title').show();
+    $('.visualization').show();
     teamData();
   })
 });
@@ -133,9 +134,7 @@ function buildSvg(data) {
                       .attr('y', function(d, i) {return i * 60})
                       .transition()
                         .duration(1500)
-                        .attr('width', function(d) {return xScale(d.homeGoals)})
-                      // .append('text')
-                      //   .text('Home Goals')
+                        .attr('width', function(d) {return xScale(d.homeGoals)});
 
   var away = canvas2.selectAll('rect')
                     .data(data)
@@ -148,13 +147,11 @@ function buildSvg(data) {
                       .attr('y', function(d, i) {return i * 60})
                       .transition()
                         .duration(1500)
-                        .attr('width', function(d) {return xScale(d.awayGoals)})
-                      // .append('text')
-                      //   .text(function(d){return d.away})
+                        .attr('width', function(d) {return xScale(d.awayGoals)});
 
   canvas.append('g')
         .attr('transform', 'translate(0, 300)')
-        .call(xAxis)
+        .call(xAxis);
 
   canvas.selectAll('svg')
         .append('text')
@@ -164,14 +161,11 @@ function buildSvg(data) {
           .text(function(d){return d.home + ', ' + d.homeGoals})
           .attr('x', function(d, i) {return i})
           .attr('y', function(d, i) {return i * 60})
-
-  canvas.selectAll('svg')
-          .append('text')
-            .text('Home Team Scoring')
+          .attr('class', 'home-labels');
 
   canvas2.append('g')
         .attr('transform', 'translate(0, 300)')
-        .call(xAxis)
+        .call(xAxis);
 
   canvas2.selectAll('svg')
       .append('text')
@@ -181,8 +175,6 @@ function buildSvg(data) {
         .text(function(d){return d.away + ', ' + d.awayGoals})
         .attr('x', function(d, i) {return i})
         .attr('y', function(d, i) {return i * 60})
+        .attr('class', 'away-labels');
 
-  canvas2.selectAll('svg')
-            .append('text')
-              .text('Away Team Scoring')
 }

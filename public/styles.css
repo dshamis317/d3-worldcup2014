@@ -5,6 +5,14 @@ body {
   background-size: cover;
 }
 
+h1 {
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
+h4 {
+  font-family: 'Questrial', sans-serif;
+}
+
 table {
   margin: 0 auto;
 }
@@ -23,14 +31,18 @@ img {
 }
 
 .visualization {
-  width: 100%;
+  width: 1200px;
+  height: 500px;
   margin: 0 auto;
+  background-color: white;
+  opacity: 0.7;
+  display: none;
 }
 
 svg {
   display: block;
   float: left;
-  margin-top: -40px;
+  margin-top: -30px;
 }
 
 h2 {
@@ -38,15 +50,27 @@ h2 {
 }
 
 .home-title {
-  position: absolute;
-  top: 150px;
-  left: 100px;
+/*  position: absolute;
+  top: 170px;
+  left: 100px;*/
+  margin-right: 235px;
   display: none;
+  font-family: 'Gloria Hallelujah', cursive;
 }
 
 .away-title {
-  position: absolute;
-  top: 150px;
-  left: 655px;
+/*  position: absolute;
+  top: 170px;
+  left: 655px;*/
+  margin-right: 200px;
   display: none;
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
+.home-labels {
+  font-family: 'Questrial', sans-serif;
+}
+
+.away-labels {
+  font-family: 'Questrial', sans-serif;
 }
