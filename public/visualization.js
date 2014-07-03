@@ -1,4 +1,8 @@
 $(function() {
+  $('.show-teams').click(function() {
+    $('.teams').slideToggle();
+  })
+
   $('.team-submit').submit(function(e) {
     e.preventDefault();
     teamData();
@@ -80,7 +84,7 @@ function buildSvg(data) {
                  .append('g')
                    .attr('width', width)
                    .attr('height', height)
-                   .attr('class', graph)
+                   // .attr('class', graph)
                    .attr('transform', 'translate('+ margin.left + ','+ margin.top + ')');
 
   var line = d3.svg.line()

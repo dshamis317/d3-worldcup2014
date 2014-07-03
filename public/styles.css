@@ -2,3 +2,7 @@ img {
   height: auto;
   width: 30px;
 }
+
+.teams {
+  display: none;
+}
