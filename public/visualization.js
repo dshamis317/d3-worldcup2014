@@ -72,7 +72,7 @@ function buildSvg(data) {
     left: 100,
     right: 100
   }
-  var width = 1265 - margin.left - margin.right;
+  var width = (1265 - margin.left - margin.right)/3;
   var height = 500 - margin.top - margin.bottom;
 
   var maxGoalsHome = d3.max(data, function(team) {
@@ -127,7 +127,7 @@ function buildSvg(data) {
                       .attr('height', 20)
                       .attr('fill', function(d) {return homeColor(d.homeGoals)})
                       .attr('x', function(d, i) {return i})
-                      .attr('y', function(d, i) {return i * 60})
+                      .attr('y', function(d, i) {return i * 40})
                       // .append('text')
                       //   .text('Home Goals')
 
@@ -139,7 +139,7 @@ function buildSvg(data) {
                       .attr('height', 20)
                       .attr('fill', function(d) {return awayColor(d.awayGoals)})
                       .attr('x', function(d, i) {return i})
-                      .attr('y', function(d, i) {return i * 30})
+                      .attr('y', function(d, i) {return i * 40})
                       // .append('text')
                       //   .text(function(d){return d.away})
 
@@ -147,7 +147,25 @@ function buildSvg(data) {
         .attr('transform', 'translate(0, 300)')
         .call(xAxis)
 
+  canvas.selectAll('svg')
+        .append('text')
+        .data(data)
+        .enter()
+        .append('text')
+          .text(function(d){return d.home})
+          .attr('x', function(d, i) {return i})
+          .attr('y', function(d, i) {return i * 40})
+
   canvas2.append('g')
         .attr('transform', 'translate(0, 300)')
         .call(xAxis)
+
+  canvas2.selectAll('svg')
+      .append('text')
+      .data(data)
+      .enter()
+      .append('text')
+        .text(function(d){return d.away})
+        .attr('x', function(d, i) {return i})
+        .attr('y', function(d, i) {return i * 40})
 }

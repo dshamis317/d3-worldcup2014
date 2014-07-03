@@ -7,6 +7,11 @@ img {
   display: none;
 }
 
+.show-teams {
+  margin-bottom: 20px;
+}
+
 svg {
-  margin: 0 auto;
+  display: block;
+  float: left;
 }
