@@ -1,6 +1,8 @@
 body {
   width: 100%;
   text-align: center;
+  background: url('images/brazil.jpg');
+  background-size: cover;
 }
 
 table {
@@ -28,4 +30,23 @@ img {
 svg {
   display: block;
   float: left;
+  margin-top: -40px;
+}
+
+h2 {
+  display: inline-block;
+}
+
+.home-title {
+  position: absolute;
+  top: 150px;
+  left: 100px;
+  display: none;
+}
+
+.away-title {
+  position: absolute;
+  top: 150px;
+  left: 655px;
+  display: none;
 }

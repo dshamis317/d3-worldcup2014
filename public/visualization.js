@@ -6,6 +6,8 @@ $(function() {
   $('.team-submit').submit(function(e) {
     e.preventDefault();
     $('.visualization').html('');
+    $('.home-title').show();
+    $('.away-title').show();
     teamData();
   })
 });
