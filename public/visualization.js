@@ -77,7 +77,7 @@ function buildSvg(data) {
     right: 100
   }
   var width = (1265 - margin.left - margin.right)/3;
-  var height = (data.length * 100 + 100) - margin.top - margin.bottom;
+  var height = ((data.length + 1) * 100) - margin.top - margin.bottom;
 
   var maxGoalsHome = d3.max(data, function(team) {
     return team.homeGoals;
