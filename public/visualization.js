@@ -77,8 +77,7 @@ function buildSvg(data) {
     right: 100
   }
   var width = (1200 - margin.left - margin.right)/3;
-  // var height = ((data.length + 2) * 100) - margin.top - margin.bottom;
-  var height = (500 - margin.top - margin.bottom)
+  var height = 500 - margin.top - margin.bottom;
 
   var maxGoalsHome = d3.max(data, function(team) {
     return team.homeGoals;
@@ -87,6 +86,8 @@ function buildSvg(data) {
   var maxGoalsAway = d3.max(data, function(team) {
     return team.awayGoals;
   });
+
+  var maxGoals = Math.max(maxGoalsHome, maxGoalsAway);
 
   var gamesPlayed = data.length;
 
@@ -99,15 +100,12 @@ function buildSvg(data) {
                       .domain([0, maxGoalsAway]);
 
   var xScale = d3.scale.linear()
-                  .domain([0, maxGoalsHome + 1])
+                  .domain([0, maxGoals + 1])
                   .range([0, width]);
-
-  var yScale = d3.scale.linear()
-                   .range([height, 0]);
 
   var xAxis = d3.svg.axis()
                     .scale(xScale)
-                    .ticks(maxGoalsHome)
+                    .ticks(maxGoals)
                     .orient('bottom');
 
   var canvas = d3.select('.visualization')
