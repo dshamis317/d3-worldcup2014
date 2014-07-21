@@ -9,14 +9,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // For Heroku Port
-// app.listen(process.env.PORT, function() {
-//   console.log('Listening on port %d');
-// })
+app.listen(process.env.PORT, function() {
+  console.log('Listening on port %d');
+})
 
 // For Local Host
-app.listen(8000, function() {
-  console.log('Listening on port 8000');
-})
+// app.listen(8000, function() {
+//   console.log('Listening on port 8000');
+// })
 
 app.post('/team', function(req, res) {
   var team = req.body.teamName;
