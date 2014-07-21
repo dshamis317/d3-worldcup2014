@@ -8,8 +8,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.listen(process.env.PORT, function() {
-  console.log('Listening on port %d');
+// For Heroku Port
+// app.listen(process.env.PORT, function() {
+//   console.log('Listening on port %d');
+// })
+
+// For Local Host
+app.listen(8000, function() {
+  console.log('Listening on port 8000');
 })
 
 app.post('/team', function(req, res) {

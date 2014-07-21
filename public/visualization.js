@@ -71,13 +71,14 @@ function buildSvg(data) {
   var data = data;
 
   var margin = {
-    top: 100,
-    bottom: 100,
+    top: 50,
+    bottom: 50,
     left: 100,
     right: 100
   }
-  var width = (1265 - margin.left - margin.right)/3;
-  var height = ((data.length + 2) * 100) - margin.top - margin.bottom;
+  var width = (1200 - margin.left - margin.right)/3;
+  // var height = ((data.length + 2) * 100) - margin.top - margin.bottom;
+  var height = (500 - margin.top - margin.bottom)
 
   var maxGoalsHome = d3.max(data, function(team) {
     return team.homeGoals;
@@ -86,6 +87,8 @@ function buildSvg(data) {
   var maxGoalsAway = d3.max(data, function(team) {
     return team.awayGoals;
   });
+
+  var gamesPlayed = data.length;
 
   var homeColor = d3.scale.linear()
                       .range(['#ff0000', '#0000ff'])
@@ -99,8 +102,12 @@ function buildSvg(data) {
                   .domain([0, maxGoalsHome + 1])
                   .range([0, width]);
 
+  var yScale = d3.scale.linear()
+                   .range([height, 0]);
+
   var xAxis = d3.svg.axis()
                     .scale(xScale)
+                    .ticks(maxGoalsHome)
                     .orient('bottom');
 
   var canvas = d3.select('.visualization')
@@ -150,7 +157,7 @@ function buildSvg(data) {
                         .attr('width', function(d) {return xScale(d.awayGoals)});
 
   canvas.append('g')
-        .attr('transform', 'translate(0, 300)')
+        .attr('transform', 'translate(0,' + (60 * gamesPlayed) + ')')
         .call(xAxis);
 
   canvas.selectAll('svg')
@@ -164,7 +171,7 @@ function buildSvg(data) {
           .attr('class', 'home-labels');
 
   canvas2.append('g')
-        .attr('transform', 'translate(0, 300)')
+        .attr('transform', 'translate(0,' + (60 * gamesPlayed) + ')')
         .call(xAxis);
 
   canvas2.selectAll('svg')
@@ -176,5 +183,4 @@ function buildSvg(data) {
         .attr('x', function(d, i) {return i})
         .attr('y', function(d, i) {return i * 60})
         .attr('class', 'away-labels');
-
 }
